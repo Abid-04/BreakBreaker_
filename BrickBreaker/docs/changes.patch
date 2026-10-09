@@ -1,0 +1,298 @@
+--- original/MyFrame.java
++++ updated/MyFrame.java
+@@ -9,6 +9,8 @@
+ 	
+ 	   MyFrame(){
+ 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++		this.setTitle("Brick Breaker");
++		this.setResizable(false);
+ 		
+ 		
+ 		
+--- original/Menu.java
++++ updated/Menu.java
+@@ -45,7 +45,9 @@
+ 	Menu(){
+ 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 		this.setSize(600,600);
+-		this.setTitle("Menu");
++		this.setTitle("Brick Breaker");
++		this.setResizable(false);
++		this.setLocationRelativeTo(null);
+ 		
+ 		backgroundImage=new ImageIcon("src//BricksBreak//retro-futuristic-background-free-vector.jpg").getImage();
+ 		
+@@ -55,6 +57,15 @@
+             protected void paintComponent(Graphics g) {
+                 super.paintComponent(g);
+                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
++                g.setColor(new Color(12, 8, 30, 85));
++                g.fillRect(0, 0, getWidth(), getHeight());
++                g.setColor(Color.WHITE);
++                g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 36));
++                String title="BRICK BREAKER";
++                g.drawString(title, (getWidth()-g.getFontMetrics().stringWidth(title))/2, 120);
++                g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 15));
++                String hint="Use the arrow keys to move the paddle";
++                g.drawString(hint, (getWidth()-g.getFontMetrics().stringWidth(hint))/2, 160);
+             }
+         };
+         panel.setLayout(null);
+@@ -73,9 +84,9 @@
+ 		styleButton(startButton);
+ 		styleButton(InfoButton);
+ 		styleButton(exitButton);
+-		startButton.setBounds(570, 210, 350, 85);
+-		InfoButton.setBounds(570, 310, 350, 85);
+-		exitButton.setBounds(570, 410, 350, 85);   
++		startButton.setBounds(160, 210, 280, 58);
++		InfoButton.setBounds(160, 288, 280, 58);
++		exitButton.setBounds(160, 366, 280, 58);   
+ 	    
+ 		startButton.addActionListener(this);
+ 		InfoButton.addActionListener(this);
+@@ -99,17 +110,17 @@
+ 		
+ 		
+ 		if(e.getSource()==startButton) {
+-			clip5.close();
++			if(clip5!=null) clip5.close();
+ 			dispose();
+ 			MyFrame frame=new MyFrame();
+ 		}
+ 		else if(e.getSource()==InfoButton) {
+-			clip5.close();
++			if(clip5!=null) clip5.close();
+ 			dispose();
+ 			gameInfo info=new gameInfo();
+ 		}
+ 		else if(e.getSource()==exitButton) {
+-			clip5.close();
++			if(clip5!=null) clip5.close();
+ 			dispose();
+ 			System.exit(0);
+ 		}
+@@ -126,7 +137,7 @@
+ 				clip5.open(audio1);
+ 				clip5.start();
+ 				clip5.loop(clip5.LOOP_CONTINUOUSLY);
+-			} catch (LineUnavailableException e) {
++			} catch (LineUnavailableException | IllegalArgumentException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+@@ -149,7 +160,7 @@
+       btn.setBorderPainted(true);
+       btn.setFocusPainted(false);
+       btn.setForeground(Color.WHITE);
+-      btn.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
++      btn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+       btn.setFocusable(false);
+       
+   }
+@@ -180,19 +191,19 @@
+ 	public void mouseEntered(MouseEvent e) {
+ 		// TODO Auto-generated method stub
+ 	    if(e.getSource()==startButton) {
+-	    	startButton.setForeground(Color.BLACK);
+-	    	startButton.setBounds(570, 210, 370, 95);
+-	    	startButton.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 32));
++	    	startButton.setForeground(new Color(255, 190, 232));
++	    	startButton.setBounds(160, 210, 280, 58);
++	    	startButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+ 	    }
+ 	    if(e.getSource()==InfoButton) {
+-	    	InfoButton.setForeground(Color.BLACK);
+-	    	InfoButton.setBounds(570, 310, 370, 95);
+-	    	InfoButton.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 32));
++	    	InfoButton.setForeground(new Color(255, 190, 232));
++	    	InfoButton.setBounds(160, 288, 280, 58);
++	    	InfoButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+ 	    }
+ 	    if(e.getSource()==exitButton) {
+-	    	exitButton.setForeground(Color.BLACK);
+-	    	exitButton.setBounds(570, 410, 370, 95);
+-	    	exitButton.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 32));
++	    	exitButton.setForeground(new Color(255, 190, 232));
++	    	exitButton.setBounds(160, 366, 280, 58);
++	    	exitButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+ 			
+ 	    }
+ 	    
+@@ -201,12 +212,12 @@
+ 	@Override
+ 	public void mouseExited(MouseEvent e) {
+ 		// TODO Auto-generated method stub
+-	    startButton.setBounds(570, 210, 350, 85);
+-		InfoButton.setBounds(570, 310, 350, 85);
+-		exitButton.setBounds(570, 410, 350, 85);
+-		startButton.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 25));
+-		InfoButton.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 25));
+-	    exitButton.setFont(new Font("Times New Roman", Font.ITALIC | Font.BOLD, 25));
++	    startButton.setBounds(160, 210, 280, 58);
++		InfoButton.setBounds(160, 288, 280, 58);
++		exitButton.setBounds(160, 366, 280, 58);
++		startButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
++		InfoButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
++	    exitButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+ 	    startButton.setForeground(Color.WHITE);
+ 	    InfoButton.setForeground(Color.WHITE);
+ 	    exitButton.setForeground(Color.WHITE);
+--- original/gameInfo.java
++++ updated/gameInfo.java
+@@ -22,7 +22,10 @@
+     
+     gameInfo(){
+    	 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+-   	 this.setSize(1500,1500);
++   	 this.setSize(600,600);
++   	 this.setResizable(false);
++   	 this.setLocationRelativeTo(null);
++   	 this.getContentPane().setBackground(new Color(20, 12, 40));
+    	 this.setTitle("Game Information");
+    	 this.setLayout(null);
+    	 
+@@ -33,16 +36,19 @@
+    	text=new JTextArea();
+        text.setEditable(false);
+        text.setLineWrap(true);
++       text.setWrapStyleWord(true);
++       text.setMargin(new java.awt.Insets(24,24,24,24));
+        text.setForeground(Color.WHITE);
+-       text.setFont(new Font("Serif", Font.PLAIN, 16));
+-       text.setBackground(Color.DARK_GRAY);
++       text.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 17));
++       text.setBackground(new Color(28, 18, 48));
+    	text.setText("Brick Breaker is a classic 2D arcade-style game built using Java Swing.\r\n"
+    			+ "The objective of the game is simple yet challenging: control a paddle to bounce a ball and break all the bricks without letting the ball "
+    			+ "fall off the bottom of the screen.\r\n"
+-   			+ "\n\n\n\n\nAbidurahman Niazi\r\n");
++   			+ "\n\nControls: Left and right arrow keys.\n\nAbidurahman Niazi\r\n");
+    	 
+    	scrollPane = new JScrollPane(text);
+-   	scrollPane.setBounds(350, 100, 750, 600);
++   	scrollPane.setBounds(35, 35, 515, 460);
++   	scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(102, 61, 117)));
+    	
+    	
+    	menu=new JMenuBar();
+--- original/MyPanel.java
++++ updated/MyPanel.java
+@@ -92,29 +92,31 @@
+ 		
+ 		
+ 		String name=JOptionPane.showInputDialog("Write player's name: ");
++		 if(name==null || name.isBlank()) name="Player";
+ 		 if(!(name.isEmpty()||name.isBlank())) {
+ 			timer.start();
+ 		}
+ 		label1=new JLabel();
+ 		label1.setText("Player: "+name);
+ 		label1.setForeground(Color.WHITE);
+-		label1.setBounds(0, 170, 160, 120);
+-		label1.setFont(new Font("New Roman Times",Font.BOLD|Font.ITALIC, 25));
++		label1.setBounds(24, 212, 430, 32);
++		label1.setFont(new Font(Font.SANS_SERIF,Font.BOLD, 20));
+ 		
+ 		label2=new JLabel();
+-		label2.setText("Score:0");
+-		label2.setBounds(0, 220,160,120);
+-		label2.setFont(new Font("New Roman Times", Font.BOLD | Font.ITALIC, 25));
++		label2.setText("Score: 0");
++		label2.setBounds(24, 250, 220, 32);
++		label2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+ 		label2.setForeground(Color.WHITE);
+ 		
+ 		highestScore=new JLabel();
+ 		highestScore.setText("Highest Score: "+highScore);
+-		highestScore.setBounds(1270, 700, 230, 120);
++		highestScore.setBounds(1135, 212, 320, 32);
+ 		highestScore.setForeground(Color.WHITE);
+-		highestScore.setFont(new Font("New Roman Times", Font.BOLD|Font.ITALIC, 20));
++		highestScore.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+ 		
+ 		playMusic("src//BricksBreak//glass-gardens-loop-371924.wav");
+-		backgroundClip.start();
++		if(backgroundClip!=null) backgroundClip.start();
++		rec2=new Rectangle(ballX,ballY,ball.getWidth(null),ball.getHeight(null));
+ 		bricks=new String[][]{{"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"}
+ 		                    ,{"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"}
+ 		                    ,{"1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"}};
+@@ -129,9 +131,9 @@
+ 		this.add(label1);
+ 		this.add(label2);
+ 		this.add(highestScore);
+-		this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
++		this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "rightAction");
+ 		this.getActionMap().put("rightAction", right);
+-		this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
++		this.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "leftAction");
+ 		this.getActionMap().put("leftAction", left);
+ 		
+ 		
+@@ -144,6 +146,12 @@
+ 		
+ 		Graphics2D g2D=(Graphics2D) g;
+ 		g2D.drawImage(gameBackground, 0, 0, null);
++        g2D.setColor(new Color(16, 10, 35, 185));
++        g2D.fillRoundRect(12, 200, 460, 92, 12, 12);
++        g2D.fillRoundRect(1120, 200, 348, 56, 12, 12);
++        g2D.setColor(new Color(238, 215, 246));
++        g2D.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
++        g2D.drawString("LEFT / RIGHT   Move the paddle", 24, 818);
+ 		g2D.drawImage(paddle, paddleX, paddleY, null);
+ 		g2D.drawImage(ball, ballX, ballY, null);
+ 		
+@@ -163,9 +171,9 @@
+ 						BYmovement = -BYmovement;
+ 		                bricks[i][j] = "0";
+ 		                score+=10;
+-		                label2.setText("score: "+score);
++		                label2.setText("Score: "+score);
+ 		               playMusic2("src//BricksBreak//snowball-smash-1-36743.wav");
+-		               smashClip.start();
++		               if(smashClip!=null) smashClip.start();
+ 				}
+ 					
+ 					}
+@@ -208,9 +216,9 @@
+ 			try {
+ 				backgroundClip=AudioSystem.getClip();
+ 				backgroundClip.open(audio1);
+-				backgroundClip.start();
++				if(backgroundClip!=null) backgroundClip.start();
+ 				backgroundClip.loop(backgroundClip.LOOP_CONTINUOUSLY);
+-			} catch (LineUnavailableException e) {
++			} catch (LineUnavailableException | IllegalArgumentException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+@@ -233,8 +241,8 @@
+ 			try {
+ 				smashClip=AudioSystem.getClip();
+ 				smashClip.open(audio2);
+-				smashClip.start();
+-			} catch (LineUnavailableException e) {
++				if(smashClip!=null) smashClip.start();
++			} catch (LineUnavailableException | IllegalArgumentException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+@@ -274,7 +282,8 @@
+ 			BYmovement=-BYmovement;	
+ 		}
+ 		if(ballY>panel_height+ball.getHeight(null)) {
+-			 backgroundClip.stop();
++            timer.stop();
++			 if(backgroundClip!=null) backgroundClip.stop();
+ 			 if (score > highScore) {
+ 			        highScore = score;
+ 			        saveHighScore(highScore);
+@@ -286,6 +295,7 @@
+ 				System.exit(0);
+ 			}
+ 			else if(answer==JOptionPane.YES_OPTION) {
++				javax.swing.SwingUtilities.getWindowAncestor(this).dispose();
+ 				Menu menu=new Menu();
+ 			}
+ 		}
