@@ -18,18 +18,6 @@ This project demonstrates object-oriented programming, GUI development, event ha
 - **Audio effects:** Background music and sound effects when bricks are destroyed.
 - **Retro-inspired interface:** Custom background images and graphical elements.
 
-## Screenshots
-
-### Main Menu
-
-*Screenshot coming soon.*
-
-### Gameplay
-
-*Screenshot coming soon.*
-
-### Game Over
-
 
 ## Screenshots
 
@@ -44,6 +32,7 @@ This project demonstrates object-oriented programming, GUI development, event ha
 
 ### Game Over
 ![BrickBreaker Game Over](screenshots_02/continue_the_game.png)
+
 
 
 ## Technologies Used
