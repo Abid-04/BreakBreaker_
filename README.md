@@ -30,7 +30,21 @@ This project demonstrates object-oriented programming, GUI development, event ha
 
 ### Game Over
 
-*Screenshot coming soon.*
+
+## Screenshots
+
+### Main Menu
+![BrickBreaker Main Menu](screenshots_02/menu_01.png)
+
+### Gameplay
+![BrickBreaker Gameplay](screenshots_02/gameplay_01.png)
+
+### Gameplay Dialog
+![BrickBreaker Gameplay Dialog](screenshots_02/gameplay_02.png)
+
+### Game Over
+![BrickBreaker Game Over](screenshots_02/continue_the_game.png)
+
 
 ## Technologies Used
 
